@@ -1,0 +1,23 @@
+version: '3'
+services:
+  backend:
+    image: nginx:latest
+    ports:
+      - 8090:80
+    environment:
+      - NGINX_HOST=backend
+  varnish:
+    build:
+      context: .
+      args:
+        VARNISH_IMAGE: ${VARNISH_IMAGE}
+        MODULES_DIR: ${MODULES_DIR}
+    environment:
+      - VARNISH_VCL_CONF=/etc/varnish/default.vcl
+    env_file:
+      - ./test/varnish.env
+    ports:
+      - 80:6081
+    volumes:
+      - ./test/varnish.env:/etc/varnish/varnish.params
+      - ./test/default.vcl:/etc/varnish/default.vcl

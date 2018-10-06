@@ -35,7 +35,7 @@ To provide a support for a new module one should:
 
 ### Supported Varnish versions
 
-4.1.x - 6.0.x
+4.1.x - 6.1.x
 
 ### Supported OS versions for packages
 

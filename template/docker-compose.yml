@@ -1,0 +1,39 @@
+version: '3.5'
+
+networks:
+  default:
+    name: ${NETWORK}
+
+services:
+  backend:
+    image: nginx:alpine
+    ports:
+      - 8090:80
+    environment:
+      - NGINX_HOST=backend
+
+  curl-backend-1:
+    image: jmalloc/echo-server
+    ports:
+      - 8095:8080
+  curl-backend-2:
+    image: jmalloc/echo-server
+    ports:
+      - 8096:8080
+
+  varnish:
+    build:
+      context: .
+      args:
+        VARNISH_IMAGE: ${VARNISH_IMAGE}
+        MODULES_DIR: ${MODULES_DIR}
+    environment:
+      - VARNISH_VCL_CONF=/etc/varnish/default.vcl
+    env_file:
+      - ./test/config/varnish.env
+    ports:
+      - 80:6081
+    volumes:
+      - ./test/config/varnish.env:/etc/varnish/varnish.params
+      - ./test/config/default.vcl:/etc/varnish/default.vcl
+      

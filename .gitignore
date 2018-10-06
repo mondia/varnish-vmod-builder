@@ -1,1 +1,4 @@
 centos-6
+benchmark
+docker-compose.yml
+!template/docker-compose.yml

@@ -12,6 +12,7 @@ ARG VARNISH_DEVEL_LIB_NAME
 # RUN curl -s https://packagecloud.io/install/repositories/varnishcache/varnish${VARNISH_PKG_VERSION}/script.rpm.sh -o script.sh && os=el dist=${CENTOS_VERSION_MAJOR} source ./script.sh
 
 RUN yum install -y \
+    git \
     gcc \
     glibc-devel \
     glibc-static \

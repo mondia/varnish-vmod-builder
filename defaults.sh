@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. .env
+
 function line {
     printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' ${1:-=}
 }
@@ -28,6 +30,12 @@ MODULE=${MODULE:-}
 BASE_IMAGE=$IMAGE_OWNER/varnish-base:$VARNISH_VERSION-centos-$CENTOS_VERSION_MINOR
 VARNISH_DEVEL_IMAGE="$IMAGE_OWNER/varnish-devel:$VARNISH_VERSION-centos-$CENTOS_VERSION_MINOR"
 VARNISH_IMAGE="$IMAGE_OWNER/varnish:$VARNISH_VERSION-centos-$CENTOS_VERSION_MINOR"
+
+# benchmark settings
+NETWORK=${NETWORK:-'benchmark'}
+METHOD=${METHOD:-'GET'}
+CONCURRENT=${CONCURRENT:-30}
+NR_OF_REQUESTS=${NR_OF_REQUESTS:-50000}
 
 line
 echo VARIABLES:

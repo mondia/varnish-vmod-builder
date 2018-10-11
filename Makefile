@@ -35,6 +35,10 @@ varnishlog: ## Opens the varnishlog console
 	@echo "Starting varnishlog..."
 	@./compose.sh "exec varnish varnishlog"
 
+console: ## Opens the Varnish console
+	@echo "Starting Varnish console..."
+	@./compose.sh "exec varnish /bin/bash"
+
 clean-rpms: ## Cleans up the RPM distribution directory.
 	@echo "Purging VMODS RPMs..."
 	rm -rf ./modules/dist
